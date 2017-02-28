@@ -1,0 +1,39 @@
+<config 
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+	<persistence directory="G:\"/>
+	<thread-pools>
+		<thread-pool min-size="1" alias="thread1" max-size="10" default="true"/>
+	</thread-pools>
+
+	<cache alias="localCache">
+		<key-type>java.lang.String</key-type>
+		<value-type>com.base.cache.album.AlbumCache</value-type>
+		<expiry>
+			<none/>
+		</expiry>
+		<!-- <eviction-advisor>com.base.cache.EvictionAdvisorImpl</eviction-advisor> -->
+		<listeners>
+			<listener>
+				<class>com.base.cache.listener.EventListener</class>
+				<event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+				<event-ordering-mode>UNORDERED</event-ordering-mode>
+				<events-to-fire-on>CREATED</events-to-fire-on>
+				<events-to-fire-on>EVICTED</events-to-fire-on>
+			</listener>
+		</listeners>
+		<resources>
+			<heap unit="entries">100</heap>
+			<!-- <offheap unit="MB">4000</offheap> -->
+			<!-- <heap unit="entries">1000</heap> -->
+			<!-- <offheap unit="MB">2048</offheap> -->
+			<disk persistent="true" unit="MB">4096</disk>
+		</resources>
+		<heap-store-settings>
+			<!-- <max-object-size unit="MB">3000</max-object-size> -->
+			<max-object-graph-size>20000</max-object-graph-size>
+		</heap-store-settings>
+	</cache>
+</config>

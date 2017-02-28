@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect" dynamicConfig="false">
+	<diskStore path="F:\ehcache2.8" />
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" diskSpoolBufferSizeMB="30"
+		maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+		<persistence strategy="localTempSwap" />
+	</defaultCache>
+
+	<!-- Sample caches. Following are some example caches. Remove these before 
+		use. -->
+
+	<!-- Sample cache named sampleCache1 This cache contains a maximum in memory 
+		of 10000 elements, and will expire an element if it is idle for more than 
+		5 minutes and lives for more than 10 minutes. If there are more than 10000 
+		elements it will overflow to the disk cache, which in this configuration 
+		will go to wherever java.io.tmp is defined on your system. On a standard 
+		Linux system this will be /tmp" -->
+		<!-- 缓存名sampleCache1，内存中最多可缓存10000个Element，其中的element会在闲置10秒或是存活20秒之后失效。
+ 
+		maxEntriesLocalHeap="100"
+		overflowToDisk="true"
+超过10000element时，element将会输出到磁盘中，输出路径是java.io.tmpdir。 -->
+	<cache name="localCache"
+		maxBytesLocalHeap="2G"
+		maxBytesLocalDisk="10G"
+		eternal="true"
+		memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+</ehcache>

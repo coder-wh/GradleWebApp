@@ -1,0 +1,31 @@
+<config 
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/xml/ehcache-core-3.0.xsd">
+
+    
+	<cache-template name="myDefaults">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+		<heap unit="entries" size="200"></heap>
+	</cache-template>
+
+	<cache alias="bar" uses-template="myDefaults">
+		<key-type>java.lang.Number</key-type>
+	</cache>
+
+	<cache alias="simpleCache" uses-template="myDefaults" />
+
+	<cache alias="localCache">
+		<key-type>java.lang.String</key-type>
+		<value-type>com.kting.huawei.fm.base.cache.album.AlbumCache</value-type>
+		<expiry>
+			<ttl unit="days">1</ttl>
+		</expiry>
+		<resources>
+			<heap unit="entries" size="10000"></heap>
+			<!-- <offheap unit="gb" size="1"></offheap> -->
+		</resources>
+	</cache>
+
+</config>
